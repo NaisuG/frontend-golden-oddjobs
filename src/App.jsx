@@ -8,6 +8,9 @@ import DashboardSolicitante from './pages/DashboardSolicitante';
 import DashboardDesarrollador from './pages/DashboardDesarrollador';
 import DashboardAdmin from './pages/DashboardAdmin';
 import Unauthorized from './pages/Unauthorized';
+import Callback from './pages/Callback';
+import Register from './pages/Register';
+import ConfirmarRegistro from './pages/ConfirmarRegistro';
 
 export default function App() {
   const auth = useAuth();
@@ -44,6 +47,9 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/callback" element={<Callback />} />
+      <Route path="/registro" element={<Register />} />
+      <Route path="/confirmar" element={<ConfirmarRegistro />} />
     </Routes>
   );
 }

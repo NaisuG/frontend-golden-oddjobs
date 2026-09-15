@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 import apiClient from '../api/apiClient';
+import { cerrarSesionCompleta } from '../auth/cognitoLogout';
 
 export default function DashboardDesarrollador() {
   const auth = useAuth();
@@ -19,7 +20,7 @@ export default function DashboardDesarrollador() {
           <li key={s.id}>{s.titulo}</li>
         ))}
       </ul>
-      <button onClick={() => auth.removeUser()}>Cerrar sesión</button>
+      <button onClick={() => { auth.removeUser(); cerrarSesionCompleta(); }}>Cerrar sesión</button>
     </div>
   );
 }

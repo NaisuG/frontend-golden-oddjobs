@@ -4,11 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from 'react-oidc-context';
 import { oidcConfig } from './auth/oidcConfig';
 import App from './App';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <AuthProvider {...oidcConfig}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
+  <AuthProvider {...oidcConfig}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </AuthProvider>
 );

@@ -11,7 +11,11 @@ export default function Callback() {
   const auth = useAuth();
 
   if (auth.isLoading) {
-    return <p>Procesando inicio de sesión...</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-paper">
+        <p className="text-ink/60">Procesando inicio de sesión...</p>
+      </div>
+    );
   }
 
   if (!auth.isAuthenticated) {

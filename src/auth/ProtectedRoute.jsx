@@ -1,6 +1,7 @@
 import { useAuth } from 'react-oidc-context';
 import { Navigate } from 'react-router-dom';
 
+// Los roles llegan en el claim "cognito:groups" (los Groups del User Pool)
 function getRoles(user) {
   const grupos = user?.profile?.['cognito:groups'];
   if (!grupos) return [];

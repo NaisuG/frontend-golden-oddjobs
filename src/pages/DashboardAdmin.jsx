@@ -3,6 +3,7 @@ import { useAuth } from 'react-oidc-context';
 import apiClient from '../api/apiClient';
 import { cerrarSesionCompleta } from '../auth/cognitoLogout';
 import DashboardLayout from '../components/DashboardLayout';
+import InformesPanel from '../components/InformesPanel';
 
 export default function DashboardAdmin() {
   const auth = useAuth();
@@ -23,6 +24,7 @@ export default function DashboardAdmin() {
         <p className="text-ink/60 mb-1">Total de solicitudes en la plataforma</p>
         <p className="font-display text-5xl font-semibold text-navy">{solicitudes.length}</p>
       </div>
+      <InformesPanel />
     </DashboardLayout>
   );
 }

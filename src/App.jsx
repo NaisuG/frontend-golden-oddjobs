@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from 'react-oidc-context';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { ROLE } from './auth/roles';
 import Login from './pages/Login';
@@ -13,8 +11,6 @@ import Register from './pages/Register';
 import ConfirmRegistration from './pages/ConfirmRegistration';
 
 export default function App() {
-  const auth = useAuth();
-
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />

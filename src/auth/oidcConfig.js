@@ -1,7 +1,7 @@
-// Config de react-oidc-context apuntando al User Pool de Cognito.
-// Si Entra External ID está federado dentro de Cognito, no cambia nada acá:
-// Cognito sigue siendo el authority, Entra solo aparece como botón "Iniciar con Microsoft"
-// dentro del Hosted UI de Cognito.
+// react-oidc-context config pointing at the Cognito User Pool.
+// If Entra External ID is federated inside Cognito nothing changes here:
+// Cognito stays the authority and Entra only shows up as a "Sign in with Microsoft" button
+// inside the Cognito Hosted UI.
 export const oidcConfig = {
   authority: import.meta.env.VITE_COGNITO_AUTHORITY,
   client_id: import.meta.env.VITE_COGNITO_CLIENT_ID,

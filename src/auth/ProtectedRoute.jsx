@@ -1,12 +1,6 @@
 import { useAuth } from 'react-oidc-context';
 import { Navigate } from 'react-router-dom';
-
-// Los roles llegan en el claim "cognito:groups" (los Groups del User Pool)
-function getRoles(user) {
-  const grupos = user?.profile?.['cognito:groups'];
-  if (!grupos) return [];
-  return Array.isArray(grupos) ? grupos : [grupos];
-}
+import { getRoles } from './roles';
 
 export default function ProtectedRoute({ children, allowedRoles }) {
   const auth = useAuth();
@@ -20,9 +14,9 @@ export default function ProtectedRoute({ children, allowedRoles }) {
   }
 
   const roles = getRoles(auth.user);
-  const autorizado = !allowedRoles || allowedRoles.some((rol) => roles.includes(rol));
+  const isAuthorized = !allowedRoles || allowedRoles.some((role) => roles.includes(role));
 
-  if (!autorizado) {
+  if (!isAuthorized) {
     return <Navigate to="/no-autorizado" replace />;
   }
 

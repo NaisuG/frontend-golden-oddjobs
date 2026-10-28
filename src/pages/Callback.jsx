@@ -1,11 +1,6 @@
 import { useAuth } from 'react-oidc-context';
 import { Navigate } from 'react-router-dom';
-
-function getRoles(user) {
-  const grupos = user?.profile?.['cognito:groups'];
-  if (!grupos) return [];
-  return Array.isArray(grupos) ? grupos : [grupos];
-}
+import { ROLE, getRoles } from '../auth/roles';
 
 export default function Callback() {
   const auth = useAuth();
@@ -23,7 +18,7 @@ export default function Callback() {
   }
 
   const roles = getRoles(auth.user);
-  if (roles.includes('ADMIN')) return <Navigate to="/admin" replace />;
-  if (roles.includes('DESARROLLADOR')) return <Navigate to="/desarrollador" replace />;
+  if (roles.includes(ROLE.ADMIN)) return <Navigate to="/admin" replace />;
+  if (roles.includes(ROLE.DEVELOPER)) return <Navigate to="/desarrollador" replace />;
   return <Navigate to="/solicitante" replace />;
 }

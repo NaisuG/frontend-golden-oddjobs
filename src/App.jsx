@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from 'react-oidc-context';
 import ProtectedRoute from './auth/ProtectedRoute';
+import { ROLE } from './auth/roles';
 import { attachAuthInterceptor } from './api/apiClient';
 import Login from './pages/Login';
-import DashboardSolicitante from './pages/DashboardSolicitante';
-import DashboardDesarrollador from './pages/DashboardDesarrollador';
+import DashboardRequester from './pages/DashboardRequester';
+import DashboardDeveloper from './pages/DashboardDeveloper';
 import DashboardAdmin from './pages/DashboardAdmin';
 import Unauthorized from './pages/Unauthorized';
 import Callback from './pages/Callback';
 import Register from './pages/Register';
-import ConfirmarRegistro from './pages/ConfirmarRegistro';
+import ConfirmRegistration from './pages/ConfirmRegistration';
 
 export default function App() {
   const auth = useAuth();
@@ -27,30 +28,30 @@ export default function App() {
       <Route
         path="/solicitante"
         element={
-          <ProtectedRoute allowedRoles={['SOLICITANTE']}>
-            <DashboardSolicitante />
+          <ProtectedRoute allowedRoles={[ROLE.REQUESTER]}>
+            <DashboardRequester />
           </ProtectedRoute>
         }
       />
       <Route
         path="/desarrollador"
         element={
-          <ProtectedRoute allowedRoles={['DESARROLLADOR']}>
-            <DashboardDesarrollador />
+          <ProtectedRoute allowedRoles={[ROLE.DEVELOPER]}>
+            <DashboardDeveloper />
           </ProtectedRoute>
         }
       />
       <Route
         path="/admin"
         element={
-          <ProtectedRoute allowedRoles={['ADMIN']}>
+          <ProtectedRoute allowedRoles={[ROLE.ADMIN]}>
             <DashboardAdmin />
           </ProtectedRoute>
         }
       />
       <Route path="/callback" element={<Callback />} />
       <Route path="/registro" element={<Register />} />
-      <Route path="/confirmar" element={<ConfirmarRegistro />} />
+      <Route path="/confirmar" element={<ConfirmRegistration />} />
     </Routes>
   );
 }

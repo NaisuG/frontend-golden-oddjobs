@@ -3,19 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { userPool } from '../auth/cognitoPool';
 
-export default function ConfirmarRegistro() {
+export default function ConfirmRegistration() {
   const location = useLocation();
   const navigate = useNavigate();
   const [email, setEmail] = useState(location.state?.email || '');
-  const [codigo, setCodigo] = useState('');
+  const [code, setCode] = useState('');
   const [error, setError] = useState('');
 
-  const confirmar = (e) => {
-    e.preventDefault();
+  const handleConfirm = (event) => {
+    event.preventDefault();
     setError('');
 
     const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-    cognitoUser.confirmRegistration(codigo, true, (err) => {
+    cognitoUser.confirmRegistration(code, true, (err) => {
       if (err) {
         setError(err.message || 'Código inválido');
         return;
@@ -29,13 +29,13 @@ export default function ConfirmarRegistro() {
       <div className="w-full max-w-sm">
         <h1 className="font-display text-3xl font-semibold text-ink mb-1">Confirma tu cuenta</h1>
         <p className="text-ink/60 mb-8">Ingresa el código que te enviamos por correo.</p>
-        <form onSubmit={confirmar} className="space-y-5">
+        <form onSubmit={handleConfirm} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-ink/80 mb-1">Correo</label>
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
               required
               className="w-full border border-ink/20 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gold"
             />
@@ -44,8 +44,8 @@ export default function ConfirmarRegistro() {
             <label className="block text-sm font-medium text-ink/80 mb-1">Código</label>
             <input
               type="text"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
+              value={code}
+              onChange={(event) => setCode(event.target.value)}
               required
               className="w-full border border-ink/20 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gold"
             />

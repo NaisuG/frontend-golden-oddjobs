@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 import apiClient from '../api/apiClient';
-import { cerrarSesionCompleta } from '../auth/cognitoLogout';
+import { fullSignOut } from '../auth/cognitoLogout';
 import DashboardLayout from '../components/DashboardLayout';
-import InformesPanel from '../components/InformesPanel';
+import ReportsPanel from '../components/ReportsPanel';
 
 export default function DashboardAdmin() {
   const auth = useAuth();
-  const [solicitudes, setSolicitudes] = useState([]);
+  const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    apiClient.get('/api/admin/solicitudes').then((res) => setSolicitudes(res.data));
+    apiClient.get('/api/admin/solicitudes').then((response) => setRequests(response.data));
   }, []);
 
   return (
@@ -18,13 +18,13 @@ export default function DashboardAdmin() {
       roleLabel="Admin"
       roleColor="navy"
       email={auth.user?.profile?.email}
-      onLogout={() => { auth.removeUser(); cerrarSesionCompleta(); }}
+      onLogout={() => { auth.removeUser(); fullSignOut(); }}
     >
       <div className="border-l-4 border-navy bg-white rounded p-6">
         <p className="text-ink/60 mb-1">Total de solicitudes en la plataforma</p>
-        <p className="font-display text-5xl font-semibold text-navy">{solicitudes.length}</p>
+        <p className="font-display text-5xl font-semibold text-navy">{requests.length}</p>
       </div>
-      <InformesPanel />
+      <ReportsPanel />
     </DashboardLayout>
   );
 }

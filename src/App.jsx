@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from 'react-oidc-context';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { ROLE } from './auth/roles';
-import { attachAuthInterceptor } from './api/apiClient';
 import Login from './pages/Login';
 import DashboardRequester from './pages/DashboardRequester';
 import DashboardDeveloper from './pages/DashboardDeveloper';
@@ -15,10 +14,6 @@ import ConfirmRegistration from './pages/ConfirmRegistration';
 
 export default function App() {
   const auth = useAuth();
-
-  useEffect(() => {
-    attachAuthInterceptor(auth);
-  }, [auth]);
 
   return (
     <Routes>
